@@ -4,11 +4,7 @@ app = Flask(__name__)
 import cv2 as cv
 import importlib
 
-if importlib.find_loader("picamera"):
-    from picamera import PiCamera
-    Camera = cv.VideoCapture(PiCamera())
-else:
-    Camera = cv.VideoCapture(0)
+Camera = cv.VideoCapture(0)
 
 app = Flask(__name__)
 
@@ -22,7 +18,7 @@ def gen(camera):
         ret, jpeg = cv.imencode('.jpg', frame)
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
 
-@app.route('/video_feed')
+@app.route('/video-feed')
 def video_feed():
     return Response(gen(Camera),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
