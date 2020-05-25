@@ -8,6 +8,12 @@ Camera = cv.VideoCapture(0)
 
 app = Flask(__name__)
 
+def make_480p():
+    Camera.set(3, 640)
+    Camera.set(4, 480)
+
+make_480p()
+
 @app.route('/')
 def index():
     return render_template('index.html')
