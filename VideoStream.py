@@ -1,8 +1,9 @@
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, request
 app = Flask(__name__)
 
 import cv2 as cv
 import importlib
+import sys
 
 Camera = cv.VideoCapture(0)
 
@@ -28,6 +29,12 @@ def gen(camera):
 def video_feed():
     return Response(gen(Camera),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/post/command', methods=['GET', 'POST'])
+def command():
+    json_data = request.get_json()
+    print(json_data['cmd'])
+    return Response(json_data)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
