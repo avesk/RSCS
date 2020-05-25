@@ -2,12 +2,13 @@ from flask import Flask, render_template, Response
 app = Flask(__name__)
 
 import cv2 as cv
+import importlib
 
 if importlib.find_loader("picamera"):
     from picamera import PiCamera
-	Camera = cv.VideoCapture(PiCamera())
+    Camera = cv.VideoCapture(PiCamera())
 else:
-	Camera = cv.VideoCapture(0)
+    Camera = cv.VideoCapture(0)
 
 app = Flask(__name__)
 
@@ -18,7 +19,8 @@ def index():
 def gen(camera):
     while True:
         ret, frame = camera.read()
-		yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+        ret, jpeg = cv.imencode('.jpg', frame)
+        yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
 
 @app.route('/video_feed')
 def video_feed():
