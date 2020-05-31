@@ -38,6 +38,9 @@ class VideoCapture(cv.VideoCapture):
         '''Captures next frame, and returns a .JPG encoded 
         image
         
+        Params:
+            fps (int) : frame_rate to display
+
         Returns jpg (obj) : encoded jpg object
         '''
 
@@ -48,6 +51,11 @@ class VideoCapture(cv.VideoCapture):
         return jpg
     
     def _set_frame_text(self, frame, text):
+        '''Sets the text of a frame object
+        Params:
+            frame (obj) : opencv frame
+            text (mixed) : text to display over the frame
+        '''
         cv.putText(
             img=frame, text=f"{text}", org=(10,50),
             fontFace=1, fontScale=1, color=(0,0,255), thickness=2
