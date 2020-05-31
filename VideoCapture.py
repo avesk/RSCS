@@ -5,7 +5,7 @@ class VideoCapture(cv.VideoCapture):
     to simplify the interface for this Applications
     VideoCapturing requirements
     '''
-    def __init__(self, fps=30):
+    def __init__(self, fps=60):
         super().__init__(0)
         self.set_frame_rate(fps)
 
@@ -30,5 +30,3 @@ class VideoCapture(cv.VideoCapture):
         _, jpg = cv.imencode('.jpg', frame)
         return jpg
     
-    def get_frame_rate(self):
-        return self.get(cv2.CAP_PROP_FPS)
