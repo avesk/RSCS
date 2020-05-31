@@ -42,12 +42,14 @@ class VideoCapture(cv.VideoCapture):
         '''
 
         _, frame = self.read()
-        texted_image =cv.putText(
-            img=frame, text=f"{fps}", org=(200,200),
-            fontFace=3, fontScale=3, color=(0,0,255), thickness=5
-        )
+        self._set_frame_text(frame, fps)
         _, jpg = cv.imencode('.jpg', frame)
 
         return jpg
     
+    def _set_frame_text(self, frame, text):
+        cv.putText(
+            img=frame, text=f"{text}", org=(10,50),
+            fontFace=1, fontScale=1, color=(0,0,255), thickness=2
+        )
 
