@@ -9,7 +9,7 @@ class VideoCapture(cv.VideoCapture):
     _720p = (1280, 720)
     _480p = (480, 640)
 
-    def __init__(self, res=_1080p):
+    def __init__(self, res=_480p):
         super().__init__(0)
         self.set_resolution(res)
 
