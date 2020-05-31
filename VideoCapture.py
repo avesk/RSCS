@@ -34,14 +34,20 @@ class VideoCapture(cv.VideoCapture):
         self.set(cv.CAP_PROP_FRAME_WIDTH, w)
         self.set(cv.CAP_PROP_FRAME_HEIGHT, h)
     
-    def capture(self):
+    def capture(self, fps=None):
         '''Captures next frame, and returns a .JPG encoded 
         image
         
         Returns jpg (obj) : encoded jpg object
         '''
+
         _, frame = self.read()
+        texted_image =cv.putText(
+            img=frame, text=f"{fps}", org=(200,200),
+            fontFace=3, fontScale=3, color=(0,0,255), thickness=5
+        )
         _, jpg = cv.imencode('.jpg', frame)
+
         return jpg
     
 

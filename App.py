@@ -17,11 +17,12 @@ def index():
     return render_template('index.html')
 
 def gen(camera):
+    fps = 0
     frames_sample = 30
     counter = frames_sample
     start = time.time()
     while True:
-        jpg = camera.capture()
+        jpg = camera.capture(fps)
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + jpg.tobytes() + b'\r\n')
         
         # Keep running estimation of frame rate
