@@ -5,7 +5,11 @@ class VideoCapture(cv.VideoCapture):
     to simplify the interface for this Applications
     VideoCapturing requirements
     '''
-    def __init__(self, fps=30, res=(1920,1080)):
+    _1080p = (1920, 1080)
+    _720p = (1280, 720)
+    _480p = (480, 640)
+
+    def __init__(self, res=_1080p):
         super().__init__(0)
         self.set_resolution(res)
 
