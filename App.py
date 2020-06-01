@@ -7,8 +7,11 @@ import sys
 import time
 
 from VideoCapture import VideoCapture
+from command_map import command_map 
+from Commands import Commands
 
 Camera = VideoCapture()
+commands = Commands()
 
 app = Flask(__name__)
 
@@ -31,7 +34,6 @@ def gen(camera):
             end = time.time()
             seconds = end - start
             fps = frames_sample / seconds
-            print(f"FRAME RATE: {fps}")
             counter = frames_sample
             start = time.time()
 
@@ -43,7 +45,12 @@ def video_feed():
 @app.route('/post/command', methods=['GET', 'POST'])
 def command():
     json_data = request.get_json()
-    print(json_data['cmd'])
+    cmd_code = json_data['cmd']
+    print(cmd_code)
+    if cmd_code in command_map:
+        cmd = command_map[f'{cmd_code}']
+        getattr(commands, cmd)()
+
     return Response(json_data)
 
 if __name__ == '__main__':
