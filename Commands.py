@@ -1,4 +1,4 @@
-import serial
+import fake_serial as serial
 
 class Commands():
     '''Class for sending WASD, Power, and Pump Toggle Byte commands
@@ -23,49 +23,39 @@ class Commands():
         self.open(serial_location)
 
     def open(self, serial_location=default_serial_location):
-        # self.ser = serial.Serial(serial_location)
-        pass 
+        self.ser = serial.Serial(serial_location)
 
     def close(self):
-        pass
-        # self.ser.close()
+        self.ser.close()
 
     def toggle_pump(self):
         print("TOGGLE_PUMP")
-        pass
-        # self.ser.write(TOGGLE_PUMP)
+        self.ser.write(self.TOGGLE_PUMP)
 
     def cut_power(self):
         print("CUT_POWER")
-        pass
-        # self.ser.write(CUT_POWER)
+        self.ser.write(self.CUT_POWER)
 
     def power(self):
         print("POWER")
-        pass
-        # self.ser.write(POWER)
+        self.ser.write(self.POWER)
 
     def break_toggle(self):
         print("BREAK_TOGGLE")
-        pass
-        # self.ser.write(BREAK_TOGGLE)
+        self.ser.write(self.BREAK_TOGGLE)
 
     def forward(self):
         print("FORWARD")
-        pass
-        # self.ser.write(FORWARD)
+        self.ser.write(self.FORWARD)
 
     def backward(self):
         print("BACKWARD")
-        pass
-        # self.ser.write(BACKWARD)
+        self.ser.write(self.BACKWARD)
 
     def left(self):
         print("LEFT")
-        pass
-        # self.ser.write(LEFT)
+        self.ser.write(self.LEFT)
 
     def right(self):
         print("LEFT")
-        pass
-        # self.ser.write(RIGHT)
+        self.ser.write(self.RIGHT)

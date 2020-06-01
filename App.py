@@ -46,7 +46,6 @@ def video_feed():
 def command():
     json_data = request.get_json()
     cmd_code = json_data['cmd']
-    print(cmd_code)
     if cmd_code in command_map:
         cmd = command_map[f'{cmd_code}']
         getattr(commands, cmd)()
