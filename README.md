@@ -11,3 +11,6 @@ For Externally Visible Server
 If OpenCV fails to install with `pip install -r requirements.txt`, try:
 `pip install opencv-contrib-python==4.1.0.25 --no-cache-dir`
 
+## Backing Up + Restoring Pi Image:
+https://pimylifeup.com/backup-raspberry-pi/
+
