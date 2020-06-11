@@ -16,6 +16,6 @@ https://pimylifeup.com/backup-raspberry-pi/
 
 ## Known Issues
 
-# Time out of sync
+### Time out of sync
 Try running `sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -d' ' -f5-8)Z"`
 
