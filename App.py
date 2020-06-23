@@ -7,9 +7,9 @@ import sys
 import time
 
 from VideoCapture import VideoCapture
-from command_map import command_map 
 from Commands import Commands
-
+from command_map import command_map 
+ 
 Camera = VideoCapture()
 commands = Commands()
 

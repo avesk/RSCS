@@ -1,4 +1,6 @@
-import fake_serial as serial
+
+import fake_serial 
+import serial 
 
 class Commands():
     '''Class for sending WASD, Power, and Pump Toggle Byte commands
@@ -23,11 +25,9 @@ class Commands():
     TOGGLE_PUMP = b'\x20' # 01000000
     E_STOP = b'\x20' # 10000000
 
-    def __init__(self, serial_location=default_serial_location):
-        self.open(serial_location)
-
-    def open(self, serial_location=default_serial_location):
-        self.ser = serial.Serial(serial_location)
+    def __init__(self, serial_location=default_serial_location, mock_serial=True):
+        ser = fake_serial if mock_serial else serial
+        self.ser = ser.Serial(serial_location)
 
     def close(self):
         self.ser.close()
