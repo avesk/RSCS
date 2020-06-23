@@ -10,14 +10,18 @@ class Commands():
 
     default_serial_location = '/dev/ttyUSB0'
 
-    TOGGLE_PUMP = b'\x08\x00' # 0100 0000 
-    CUT_POWER = b'\x04\x00'  # 0100 0000 
-    BREAK_TOGGLE = b'\x02\x00' # 0010 0000 
-    POWER = b'\x01\x00' # 0001 0000 
-    FORWARD = b'\x00\x08' # 0000 1000
-    BACKWARD = b'\x00\x04' # 0000 0100
-    LEFT = b'\x00\x02' # 0000 0010
-    RIGHT = b'\x00\x01' # 0000 0001
+    NORTH = b'\x01\x00' # 00000001
+    WEST = b'\x02' # 00000010
+    SOUTH = b'\x04' # 00000100
+    EAST = b'\x08' # 00001000
+    NORTH_WEST = b'\x03' # 00000011
+    NORTH_EAST = b'\x09' # 00001001
+    SOUTH_WEST = b'\x06' # 00000110
+    SOUTH_EAST = b'\x0C' # 00001100
+    FAST_MODE = b'\x10' # 00010000
+    START = b'\x20' # 00100000
+    TOGGLE_PUMP = b'\x20' # 01000000
+    E_STOP = b'\x20' # 10000000
 
     def __init__(self, serial_location=default_serial_location):
         self.open(serial_location)
@@ -28,34 +32,50 @@ class Commands():
     def close(self):
         self.ser.close()
 
+    def start(self):
+        print("START")
+        self.ser.write(self.START)
+
     def toggle_pump(self):
         print("TOGGLE_PUMP")
         self.ser.write(self.TOGGLE_PUMP)
 
-    def cut_power(self):
-        print("CUT_POWER")
-        self.ser.write(self.CUT_POWER)
-
-    def power(self):
-        print("POWER")
-        self.ser.write(self.POWER)
+    def e_stop(self):
+        print("E_STOP")
+        self.ser.write(self.E_STOP)
 
     def break_toggle(self):
         print("BREAK_TOGGLE")
         self.ser.write(self.BREAK_TOGGLE)
 
-    def forward(self):
-        print("FORWARD")
-        self.ser.write(self.FORWARD)
+    def north(self):
+        print("NORTH")
+        self.ser.write(self.NORTH)
 
-    def backward(self):
-        print("BACKWARD")
-        self.ser.write(self.BACKWARD)
+    def south(self):
+        print("SOUTH")
+        self.ser.write(self.SOUTH)
 
-    def left(self):
-        print("LEFT")
-        self.ser.write(self.LEFT)
+    def west(self):
+        print("WEST")
+        self.ser.write(self.WEST)
 
-    def right(self):
-        print("LEFT")
-        self.ser.write(self.RIGHT)
+    def east(self):
+        print("EAST")
+        self.ser.write(self.EAST)
+    
+    def north_west(self):
+        print("NORTH_WEST")
+        self.ser.write(self.NORTH_WEST)
+    
+    def north_east(self):
+        print("NORTH_EAST")
+        self.ser.write(self.NORTH_EAST)
+    
+    def south_west(self):
+        print("SOUTH_WEST")
+        self.ser.write(self.SOUTH_WEST)
+    
+    def south_east(self):
+        print("SOUTH_EAST")
+        self.ser.write(self.SOUTH_EAST)

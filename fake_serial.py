@@ -3,7 +3,7 @@
 # A very crude simulator for PySerial assuming it
 # is emulating an Arduino.
 # 
-# Retrieved from http://www.science.smith.edu/dftwiki/index.php/PySerial_Simulator
+# Adapted from http://www.science.smith.edu/dftwiki/index.php/PySerial_Simulator
 
 
 # a Serial class emulator 
