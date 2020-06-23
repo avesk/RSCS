@@ -9,8 +9,8 @@ command_map = {
     "z": "south_west",
     "c": "south_east",
     # Toggles
-    "space": "fast_mode",
+    " ": "fast_mode",
     "m": "start",
-    "p": "pump_toggle",
-    "backspace": "e_stop",
+    "p": "toggle_pump",
+    "Backspace": "e_stop",
 }
