@@ -7,23 +7,24 @@
     your python server 
     */
     var COMMAND_URL = "/post/command";
-
+    var get_key = (code) => {
+      code.replace(/(<([^>]+)>)/ig,"")
+       return code == ' ' ? 'Space' : code
+    }
     $(document).keydown(function(e) {
-    
-        // $.post(COMMAND_URL, {cmd: e.keyCode});
         $.ajax({
           type: 'POST',
           contentType: 'application/json',
           url: COMMAND_URL,
           dataType : 'json',
-          data : JSON.stringify({cmd: e.key}),
+          data : JSON.stringify({cmd: get_key(e.key)}),
           success : function(result) {
             jQuery("#clash").html(result); 
           },error : function(result){
             console.log(result);
           }
         });
-        console.log(e.keyCode);
+        console.log(e.key);
     });
   </script>
   <head>
