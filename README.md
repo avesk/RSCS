@@ -48,8 +48,22 @@ Starting the VPN:
 * The Bot should now be accessible in the VPN at `10.0.0.10[n]`
 
 #### Time out of sync
-Try running `sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -d' ' -f5-8)Z"`
+If the bot is having trouble connecting to the VPN,
+Try running: `sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -d' ' -f5-8)Z"`
+***This will likely be taken care of in the .bashrc file***
 
-### More info:
+#### More info:
 [Connecting To Access Server With Linux](https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-linux/)
+  
+### Registering Remote Operators
+* Contact support and request Administrative access, you will have to give them your public IP address. Support will whitelist your IP and send you the `VPN URL`, `user name` and temporary `password`. 
+* Visit the `VPN URL` page and log in with your credentials.
+* Once logged in, select `Change Password`, and update your password.
+* Once the page reloads hit `Update Running Server`.
+* Now, visit the `VPN URL`, and download your user locked client config file.
+* Also visit the link and download the `OpenVPN Connect` for your OS.
+* Follow the instructions for connecting to your VPN through `OpenVPN Connect`. You will need your `VPN URL`, `user name`, and `password`.
+* You now should be connected to the VPN!
+  
+
 
