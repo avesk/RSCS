@@ -1,12 +1,16 @@
 command_map = {
     # WASD
-    "w": "forward",
-    "s": "backward",
-    "a": "left",
-    "d": "right",
+    "w": "north",
+    "s": "south",
+    "a": "west",
+    "d": "east",
+    "q": "north_west",
+    "e": "north_east",
+    "z": "south_west",
+    "c": "south_east",
     # Toggles
-    "r": "toggle_pump",
-    "c": "cut_power",
-    "b": "break_toggle",
-    "p": "power",
+    " ": "fast_mode",
+    "m": "start",
+    "p": "toggle_pump",
+    "Backspace": "e_stop",
 }

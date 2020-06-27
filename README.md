@@ -14,8 +14,13 @@ If OpenCV fails to install with `pip install -r requirements.txt`, try:
 ## Backing Up + Restoring Pi Image:
 https://pimylifeup.com/backup-raspberry-pi/
 
-## Known Issues
+## VPN Setup
 
-### Time out of sync
+* For auto-login profiles: `sudo openvpn --config client.ovpn`
+
+#### Time out of sync
 Try running `sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -d' ' -f5-8)Z"`
+
+### More info:
+[Connecting To Access Server With Linux](https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-linux/)
 

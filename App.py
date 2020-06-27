@@ -1,5 +1,4 @@
 from flask import Flask, render_template, Response, request
-app = Flask(__name__)
 
 import cv2 as cv
 import importlib
@@ -7,9 +6,10 @@ import sys
 import time
 
 from VideoCapture import VideoCapture
-from command_map import command_map 
 from Commands import Commands
-
+from command_map import command_map 
+ 
+app = Flask(__name__)
 Camera = VideoCapture()
 commands = Commands()
 
