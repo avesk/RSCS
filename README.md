@@ -16,6 +16,20 @@ https://pimylifeup.com/backup-raspberry-pi/
 
 ## VPN Setup
 
+### Administrator Access
+Starting the VPN:
+* Contact support and request Administrative access, you will have to give them your public IP address. Support will whitelist your IP and send you the `VPN URL`, `admin user name` and temporary `password`. 
+* Visit the `VPN URL`/`admin` page and log in with your credentials.
+* Go to User `Management > User Permissions` and select the `More settings` button next to your `admin user name`. Change your password to something secure, select `Save Settings`.
+* Once the page reloads hit `Update Running Server`.
+* Now, visit the `VPN URL`, and download your user locked client config file.
+* Also visit the link and download the `OpenVPN Connect` for your OS.
+
+![img](img/dl-client-config.png)
+* Follow the instructions for connecting to your VPN through `OpenVPN Connect`. You will need your `VPN URL`, `user name`, and `password`.
+* You now should be connected to the VPN!
+
+### Registering Remote Operators
 * For auto-login profiles: `sudo openvpn --config client.ovpn`
 
 #### Time out of sync
