@@ -29,8 +29,23 @@ Starting the VPN:
 * Follow the instructions for connecting to your VPN through `OpenVPN Connect`. You will need your `VPN URL`, `user name`, and `password`.
 * You now should be connected to the VPN!
 
-### Registering Remote Operators
-* For auto-login profiles: `sudo openvpn --config client.ovpn`
+### Registering Bots
+* With an Admin account, log into the `VPN Admin` interface.
+* Create a new user called `bot[n]` where `[n]` is some unused suffix for existing bots on the VPN with the following Permissions checked/selected:
+  * `No Default Group`
+  * `Allow Auto Login`
+* Select `More Settings` and:
+  * Give the bot a static IP address of the form: `10.0.0.10[n]`
+  * Check the `all server-side private subnets` box
+  * Check the `all other VPN clients` box
+* Hit `Save Settings`
+* Once the page reloads hit `Update Running Server`.
+* Now, visit the `VPN URL`, and login with the credentials for the bot user you just created and download the autologin client config file.
+* rename the file to `bot-client.ovpn`
+* `SCP` the config file into the Bot's `home` directory.
+* Whitelist the Bot's Public IP Address in Google Cloud (Contact support if neccessary)
+* Reboot the Bot
+* The Bot should now be accessible in the VPN at `10.0.0.10[n]`
 
 #### Time out of sync
 Try running `sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -d' ' -f5-8)Z"`
