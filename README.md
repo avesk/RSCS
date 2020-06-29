@@ -1,11 +1,10 @@
 ## Running the APP
-`export FLASK_APP=App.py`
 
-For localhost:
-`flask run`
+For local development:
+`python App.py -m False`
 
-For Externally Visible Server
-`flask run --host=0.0.0.0`
+For Production
+`python App.py`
 
 ## Installation
 If OpenCV fails to install with `pip install -r requirements.txt`, try:

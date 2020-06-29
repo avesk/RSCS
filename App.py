@@ -5,54 +5,60 @@ import importlib
 import sys
 import time
 
-import config
 from VideoCapture import VideoCapture
 from Commands import Commands
 from command_map import command_map 
  
-app = Flask(__name__)
-Camera = VideoCapture()
-commands = Commands(
-    serial_location=config.serial_dev,
-    mock_serial=config.mock_serial
-)
+def create_app(config):
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+    app = Flask(__name__)
 
-def gen(camera):
-    fps = 0
-    frames_sample = 30
-    counter = frames_sample
-    start = time.time()
-    while True:
-        jpg = camera.capture(fps)
-        yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + jpg.tobytes() + b'\r\n')
-        
-        # Keep running estimation of frame rate
-        counter -= 1
-        if counter == 0:
-            end = time.time()
-            seconds = end - start
-            fps = frames_sample / seconds
-            counter = frames_sample
-            start = time.time()
+    Camera = VideoCapture()
+    commands = Commands(
+        serial_location=config.serial_dev,
+        mock_serial=config.mock_serial
+    )
 
-@app.route('/video-feed')
-def video_feed():
-    return Response(gen(Camera),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
+    @app.route('/')
+    def index():
+        return render_template('index.html')
 
-@app.route('/post/command', methods=['GET', 'POST'])
-def command():
-    json_data = request.get_json()
-    cmd_code = json_data['cmd']
-    if cmd_code in command_map:
-        cmd = command_map[f'{cmd_code}']
-        getattr(commands, cmd)()
+    def gen(camera):
+        fps = 0
+        frames_sample = 30
+        counter = frames_sample
+        start = time.time()
+        while True:
+            jpg = camera.capture(fps)
+            yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + jpg.tobytes() + b'\r\n')
+            
+            # Keep running estimation of frame rate
+            counter -= 1
+            if counter == 0:
+                end = time.time()
+                seconds = end - start
+                fps = frames_sample / seconds
+                counter = frames_sample
+                start = time.time()
 
-    return Response(json_data)
+    @app.route('/video-feed')
+    def video_feed():
+        return Response(gen(Camera),
+                        mimetype='multipart/x-mixed-replace; boundary=frame')
 
-if __name__ == '__main__':
+    @app.route('/post/command', methods=['GET', 'POST'])
+    def command():
+        json_data = request.get_json()
+        cmd_code = json_data['cmd']
+        if cmd_code in command_map:
+            cmd = command_map[f'{cmd_code}']
+            getattr(commands, cmd)()
+
+        return Response(json_data)
+
+    return app
+
+if __name__ == '__main__':    
+    from config import args
+    app = create_app(args)
     app.run(host='0.0.0.0', debug=True)
