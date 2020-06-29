@@ -5,15 +5,17 @@ import importlib
 import sys
 import time
 
+import config
 from VideoCapture import VideoCapture
 from Commands import Commands
 from command_map import command_map 
  
 app = Flask(__name__)
 Camera = VideoCapture()
-commands = Commands()
-
-app = Flask(__name__)
+commands = Commands(
+    serial_location=config.serial_dev,
+    mock_serial=config.mock_serial
+)
 
 @app.route('/')
 def index():
