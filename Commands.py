@@ -12,7 +12,7 @@ class Commands():
 
     default_serial_location = '/dev/ttyUSB0'
 
-    NORTH = b'\x01\x00' # 00000001
+    NORTH = b'\x01' # 00000001
     WEST = b'\x02' # 00000010
     SOUTH = b'\x04' # 00000100
     EAST = b'\x08' # 00001000
@@ -22,8 +22,8 @@ class Commands():
     SOUTH_EAST = b'\x0C' # 00001100
     FAST_MODE = b'\x10' # 00010000
     START = b'\x20' # 00100000
-    TOGGLE_PUMP = b'\x20' # 01000000
-    E_STOP = b'\x20' # 10000000
+    TOGGLE_PUMP = b'\x40' # 01000000
+    E_STOP = b'\x80' # 10000000
 
     def __init__(self, serial_location=default_serial_location, mock_serial=True):
         ser = fake_serial if mock_serial else serial
@@ -47,6 +47,10 @@ class Commands():
     def break_toggle(self):
         print("BREAK_TOGGLE")
         self.ser.write(self.BREAK_TOGGLE)
+
+    def fast_mode(self):
+        print("FAST_mode")
+        self.ser.write(self.FAST_MODE)
 
     def north(self):
         print("NORTH")
