@@ -10,7 +10,7 @@ class Commands():
         (P)umpToggle (C)utPower (B)reakToggle (P)ower (F)orward (B)ack (L)eft (R)ight
      '''
 
-    default_serial_location = '/dev/ttyUSB0'
+    default_serial_dev = '/dev/serial0'
 
     NORTH = b'\x01' # 00000001
     WEST = b'\x02' # 00000010
@@ -25,9 +25,13 @@ class Commands():
     TOGGLE_PUMP = b'\x40' # 01000000
     E_STOP = b'\x80' # 10000000
 
-    def __init__(self, serial_location=default_serial_location, mock_serial=True):
-        ser = fake_serial if mock_serial else serial
-        self.ser = ser.Serial(serial_location)
+    def __init__(self, serial_dev=default_serial_dev):
+        try:
+            ser = serial
+            self.ser = ser.Serial(serial_dev)
+        except:
+            ser = fake_serial
+            self.ser = ser.Serial(serial_dev)
 
     def close(self):
         self.ser.close()
