@@ -18,17 +18,17 @@ class PiCamera(object):
     last_access = 0  # time of last client access to the camera
 
     def initialize(self):
-        if Camera.thread is None:
+        if PiCamera.thread is None:
             # start background frame thread
-            Camera.thread = threading.Thread(target=self._thread)
-            Camera.thread.start()
+            PiCamera.thread = threading.Thread(target=self._thread)
+            PiCamera.thread.start()
 
             # wait until frames start to be available
             while self.frame is None:
                 time.sleep(0)
 
     def capture(self, fps=None):
-        Camera.last_access = time.time()
+        PiCamera.last_access = time.time()
         self.initialize()
         return self.frame
 
