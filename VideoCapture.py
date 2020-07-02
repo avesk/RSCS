@@ -48,7 +48,7 @@ class VideoCapture(cv.VideoCapture):
         self._set_frame_text(frame, fps)
         _, jpg = cv.imencode('.jpg', frame)
 
-        return jpg.toBytes()
+        return jpg.tobytes()
     
     def _set_frame_text(self, frame, text):
         '''Sets the text of a frame object

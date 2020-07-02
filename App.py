@@ -28,7 +28,7 @@ def gen(camera):
     start = time.time()
     while True:
         jpg = camera.capture(fps)
-        yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + jpg.toBytes() + b'\r\n\r\n')
+        yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + jpg + b'\r\n\r\n')
         
         # Keep running estimation of frame rate
         counter -= 1
