@@ -41,7 +41,7 @@ def gen(camera):
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(gen(PiCamera), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen(PiCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/post/command', methods=['GET', 'POST'])
 def command():
