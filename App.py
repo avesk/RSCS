@@ -8,6 +8,8 @@ import time
 from VideoCapture import VideoCapture
 from Commands import Commands
 from command_map import command_map 
+
+from PiCamera import piamera
  
 app = Flask(__name__)
 Camera = VideoCapture()
@@ -39,7 +41,7 @@ def gen(camera):
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(gen(Camera), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen(piamera), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/post/command', methods=['GET', 'POST'])
 def command():
