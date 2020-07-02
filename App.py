@@ -26,7 +26,7 @@ def gen(camera):
     start = time.time()
     while True:
         jpg = camera.capture(fps)
-        yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + jpg.tobytes() + b'\r\n')
+        yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + jpg.tobytes() + b'\r\n\r\n')
         
         # Keep running estimation of frame rate
         counter -= 1
@@ -37,10 +37,9 @@ def gen(camera):
             counter = frames_sample
             start = time.time()
 
-@app.route('/video-feed')
+@app.route('/video_feed')
 def video_feed():
-    return Response(gen(Camera),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen(Camera), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/post/command', methods=['GET', 'POST'])
 def command():
