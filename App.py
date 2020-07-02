@@ -17,6 +17,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    ip_address = request.remote_addr
     return render_template('index.html')
 
 def gen(camera):
@@ -26,7 +27,7 @@ def gen(camera):
     start = time.time()
     while True:
         jpg = camera.capture(fps)
-        yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + jpg.tobytes() + b'\r\n')
+        yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + jpg + b'\r\n\r\n')
         
         # Keep running estimation of frame rate
         counter -= 1
@@ -39,8 +40,7 @@ def gen(camera):
 
 @app.route('/video-feed')
 def video_feed():
-    return Response(gen(Camera),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen(Camera), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/post/command', methods=['GET', 'POST'])
 def command():
