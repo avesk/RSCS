@@ -41,14 +41,14 @@ class VideoCapture(cv.VideoCapture):
         Params:
             fps (int) : frame_rate to display
 
-        Returns jpg (obj) : encoded jpg object
+        Returns jpg (Bytes) : encoded jpg object
         '''
 
         _, frame = self.read()
         self._set_frame_text(frame, fps)
         _, jpg = cv.imencode('.jpg', frame)
 
-        return jpg
+        return jpg.toBytes()
     
     def _set_frame_text(self, frame, text):
         '''Sets the text of a frame object
