@@ -14,6 +14,7 @@ from PiCamera import Camera as PiCamera
 app = Flask(__name__)
 commands = Commands()
 Camera = VideoCapture()
+Camera2 = PiCamera()
 
 app = Flask(__name__)
 
@@ -41,7 +42,7 @@ def gen(camera):
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(gen(Camera), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen(Camera2), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/post/command', methods=['GET', 'POST'])
 def command():
