@@ -3,7 +3,6 @@
 #
 #  camera_pi.py
 #  
-# Retrieved from https://github.com/Mjrovai/Video-Streaming-with-Flask/blob/master/camWebServer/camera_pi.py
 #  
 #  
 import time
@@ -12,23 +11,23 @@ import threading
 import picamera
 
 
-class PiCamera(object):
+class Camera(object):
     thread = None  # background thread that reads frames from camera
     frame = None  # current frame is stored here by background thread
     last_access = 0  # time of last client access to the camera
 
     def initialize(self):
-        if PiCamera.thread is None:
+        if Camera.thread is None:
             # start background frame thread
-            PiCamera.thread = threading.Thread(target=self._thread)
-            PiCamera.thread.start()
+            Camera.thread = threading.Thread(target=self._thread)
+            Camera.thread.start()
 
             # wait until frames start to be available
             while self.frame is None:
                 time.sleep(0)
 
     def capture(self, fps=None):
-        PiCamera.last_access = time.time()
+        Camera.last_access = time.time()
         self.initialize()
         return self.frame
 

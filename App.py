@@ -9,7 +9,7 @@ from VideoCapture import VideoCapture
 from Commands import Commands
 from command_map import command_map 
 
-from PiCamera import PiCamera
+from PiCamera import Camera as PiCamera
  
 app = Flask(__name__)
 Camera = VideoCapture()
