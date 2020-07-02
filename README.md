@@ -12,7 +12,8 @@ If OpenCV fails to install with `pip install -r requirements.txt`, try:
 `pip install opencv-contrib-python==4.1.0.25 --no-cache-dir`
 
 ## Backing Up + Restoring Pi Image:
-https://pimylifeup.com/backup-raspberry-pi/
+* OSX: https://pimylifeup.com/backup-raspberry-pi/
+* Linux: https://www.raspberrypi.org/forums/viewtopic.php?t=46911
 
 ## VPN Setup
 
