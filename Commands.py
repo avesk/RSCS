@@ -27,7 +27,7 @@ class Commands():
 
     def __init__(self, serial_dev=default_serial_dev):
         ser = serial
-            self.ser = ser.Serial(serial_dev)
+        self.ser = ser.Serial(serial_dev)
         # try:
         #     ser = serial
         #     self.ser = ser.Serial(serial_dev)
