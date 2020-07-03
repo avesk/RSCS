@@ -14,6 +14,7 @@
         $.ajax({
           type: 'POST',
           contentType: 'application/json',
+          contentType: "application/json; charset=utf-8",
           url: COMMAND_URL,
           dataType : 'json',
           data : JSON.stringify({cmd: get_key(e.key)}),
