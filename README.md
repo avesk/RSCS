@@ -1,3 +1,6 @@
+# Overview
+(R)emote (S)oftware (C)ommunications (S)ystem is a lightweight Raspberry Pi Flask server for streaming video to the browser and mapping post requests to serial instructions. This system is built to interface with a remotely controlled bot armed with disinfectant pumps to be deployed in a commercial setting. This project is deployed with a custom VPN server to allow flexibility in connecting bots with remote operators from any location with an internet connection. 
+
 ## Running the APP
 `export FLASK_APP=App.py`
 
