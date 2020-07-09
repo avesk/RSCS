@@ -67,7 +67,7 @@ Try running: `sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep
 * You now should be connected to the VPN!
 
 ## NGINX
-* Start manually: `--ini /home/pi/RSCS/uwsgi_config.ini`
+* Start manually: `uwsgi --ini /home/pi/RSCS/uwsgi_config.ini`
 * viewing error logs `tail -f /var/log/nginx/access.log`
 
 more info: 
