@@ -67,7 +67,8 @@ Try running: `sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep
 * You now should be connected to the VPN!
 
 ## NGINX
-* Start manually: `uwsgi --socket 0.0.0.0:8000 --protocol=http -w App:app`
+* Start manually: `--ini /home/pi/RSCS/uwsgi_config.ini`
+* viewing error logs `tail -f /var/log/nginx/access.log`
 
 more info: 
 * https://www.raspberrypi-spy.co.uk/2018/12/running-flask-under-nginx-raspberry-pi/
