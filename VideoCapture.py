@@ -10,7 +10,7 @@ class VideoCapture(cv.VideoCapture):
     _480p = (480, 640)
 
     def __init__(self, res=_480p):
-        super().__init__(0)
+        super().__init__(-1)
         self.set_resolution(res)
 
     def set_frame_rate(self, fps):
