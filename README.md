@@ -68,7 +68,9 @@ Try running: `sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep
 ## NGINX
 * Start manually: `uwsgi --socket 0.0.0.0:8000 --protocol=http -w App:app`
 
-more info: https://iotbytes.wordpress.com/python-flask-web-application-on-raspberry-pi-with-nginx-and-uwsgi/
+more info: 
+* https://www.raspberrypi-spy.co.uk/2018/12/running-flask-under-nginx-raspberry-pi/
+* https://iotbytes.wordpress.com/python-flask-web-application-on-raspberry-pi-with-nginx-and-uwsgi/
 
 ## Known Issues:
 Problems with `systemd`:
