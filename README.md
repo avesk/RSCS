@@ -54,7 +54,7 @@ Try running: `sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep
 
 #### More info:
 * nohup sudo openvpn --config bot-client.ovpn &
-[Connecting To Access Server With Linux](https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-linux/)
+* [Connecting To Access Server With Linux](https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-linux/)
   
 ### Registering Remote Operators
 * Contact support and request Administrative access, you will have to give them your public IP address. Support will whitelist your IP and send you the `VPN URL`, `user name` and temporary `password`. 
