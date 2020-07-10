@@ -26,12 +26,11 @@ class Commands():
     E_STOP = b'\x80' # 10000000
 
     def __init__(self, serial_dev=default_serial_dev):
-        # ser = serial
-        # self.ser = ser.Serial(serial_dev)
         try:
             ser = serial
             self.ser = ser.Serial(serial_dev)
         except:
+            print("FAKE SERIAL!!")
             ser = fake_serial
             self.ser = ser.Serial(serial_dev)
 
