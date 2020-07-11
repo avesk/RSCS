@@ -15,6 +15,9 @@ If OpenCV fails to install with `pip install -r requirements.txt`, try:
 https://pimylifeup.com/backup-raspberry-pi/
 
 ## VPN Setup
+### Shutting down the VM
+* SSH into the VM instance
+* run `sudo poweroff`
 
 ### Administrator Access
 Starting the VPN:
