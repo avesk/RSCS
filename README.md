@@ -56,7 +56,7 @@ Try running: `sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep
 ***This will likely be taken care of in the .bashrc file***
 
 #### More info:
-* nohup sudo openvpn --config bot-client.ovpn &
+* `nohup sudo openvpn --config bot-client.ovpn &`
 * [Connecting To Access Server With Linux](https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-linux/)
   
 ### Registering Remote Operators
