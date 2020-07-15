@@ -45,7 +45,6 @@ def video_feed():
 @app.route('/post/command', methods=['GET', 'POST'])
 def command():
     json_data = json.loads(request.data)
-    # json_data = request.get_json()
     cmd_code = json_data['cmd']
     if cmd_code in command_map:
         cmd = command_map[f'{cmd_code}']
