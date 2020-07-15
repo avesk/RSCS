@@ -22,21 +22,19 @@ commands = Commands()
 app = Flask(__name__)
 
 # SESSION_TYPE = 'redis'
-SESSION_TYPE = 'filesystem'
-app.config.from_object(__name__)
-Session(app)
+# SESSION_TYPE = 'filesystem'
+# app.config.from_object(__name__)
+# Session(app)
 
-@app.before_request
-def make_session_permanent():
-    session.permanent = True
-    app.permanent_session_lifetime = timedelta(seconds=10)
+# @app.before_request
+# def make_session_permanent():
+#     session.permanent = True
+#     app.permanent_session_lifetime = timedelta(seconds=10)
 
 @app.route('/')
 def index():
     is_active = cache.get('active')
-    # is_active = session.get('active', 'no')
     print(f'is_active: {is_active}')
-    # if is_active == request.remote_addr or is_active == 'no':
     if is_active == request.remote_addr or is_active == None:
         return render_template('index.html')
     else:
@@ -66,8 +64,7 @@ def video_feed():
 
 @app.route('/post/command', methods=['GET', 'POST'])
 def command():
-    # session['active'] = request.remote_addr
-    cache.set('active', request.remote_addr, timeout=10)
+    cache.set('active', request.remote_addr, timeout=30)
     json_data = json.loads(request.data)
     cmd_code = json_data['cmd']
     if cmd_code in command_map:
