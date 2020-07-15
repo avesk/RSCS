@@ -1,6 +1,9 @@
 from flask import Flask, render_template, Response, request, session
 from flask_session import Session
 
+from werkzeug.contrib.cache import SimpleCache
+cache = SimpleCache()
+
 import cv2 as cv
 from datetime import timedelta
 import importlib
@@ -30,9 +33,11 @@ def make_session_permanent():
 
 @app.route('/')
 def index():
-    is_active = session.get('active', 'no')
+    is_active = cache.get('active')
+    # is_active = session.get('active', 'no')
     print(f'is_active: {is_active}')
-    if is_active == request.remote_addr or is_active == 'no':
+    # if is_active == request.remote_addr or is_active == 'no':
+    if is_active == request.remote_addr or is_active == None:
         return render_template('index.html')
     else:
         return render_template('bot_in_use.html') 
@@ -61,7 +66,8 @@ def video_feed():
 
 @app.route('/post/command', methods=['GET', 'POST'])
 def command():
-    session['active'] = request.remote_addr
+    # session['active'] = request.remote_addr
+    cache.set('active', request.remote_addr, timeout=10)
     json_data = json.loads(request.data)
     cmd_code = json_data['cmd']
     if cmd_code in command_map:
