@@ -63,5 +63,14 @@ def command():
 
     return Response(json_data)
 
+@app.route('/is_active')
+def is_active():
+    is_active = cache.get('active')
+    print(f'is_active: {is_active}')
+    if is_active == is_active == None:
+        return Response({"no"})
+    else:
+        return Response({"yes"})
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, threaded=True)
