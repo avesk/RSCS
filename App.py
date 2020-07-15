@@ -4,6 +4,7 @@ import cv2 as cv
 import importlib
 import sys
 import time
+import json
 
 from VideoCapture import VideoCapture
 from Commands import Commands
@@ -26,7 +27,7 @@ def gen(camera):
     start = time.time()
     while True:
         jpg = camera.capture(fps)
-        yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + jpg.tobytes() + b'\r\n')
+        yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + jpg.tobytes() + b'\r\n\r\n')
         
         # Keep running estimation of frame rate
         counter -= 1
@@ -37,14 +38,13 @@ def gen(camera):
             counter = frames_sample
             start = time.time()
 
-@app.route('/video-feed')
+@app.route('/video_feed')
 def video_feed():
-    return Response(gen(Camera),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen(Camera), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/post/command', methods=['GET', 'POST'])
 def command():
-    json_data = request.get_json()
+    json_data = json.loads(request.data)
     cmd_code = json_data['cmd']
     if cmd_code in command_map:
         cmd = command_map[f'{cmd_code}']
@@ -53,4 +53,4 @@ def command():
     return Response(json_data)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=True, threaded=True)
