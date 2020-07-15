@@ -21,16 +21,6 @@ commands = Commands()
 
 app = Flask(__name__)
 
-# SESSION_TYPE = 'redis'
-# SESSION_TYPE = 'filesystem'
-# app.config.from_object(__name__)
-# Session(app)
-
-# @app.before_request
-# def make_session_permanent():
-#     session.permanent = True
-#     app.permanent_session_lifetime = timedelta(seconds=10)
-
 @app.route('/')
 def index():
     is_active = cache.get('active')
