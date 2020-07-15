@@ -1,8 +1,5 @@
-from flask import Flask, render_template, Response, request, session
-from flask_session import Session
-
+from flask import Flask, render_template, Response, request
 from werkzeug.contrib.cache import SimpleCache
-cache = SimpleCache()
 
 import cv2 as cv
 from datetime import timedelta
@@ -15,6 +12,7 @@ from VideoCapture import VideoCapture
 from Commands import Commands
 from command_map import command_map 
  
+cache = SimpleCache()
 app = Flask(__name__)
 Camera = VideoCapture()
 commands = Commands()
