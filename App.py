@@ -18,7 +18,8 @@ commands = Commands()
 
 app = Flask(__name__)
 
-SESSION_TYPE = 'redis'
+# SESSION_TYPE = 'redis'
+SESSION_TYPE = 'filesystem'
 app.config.from_object(__name__)
 Session(app)
 
@@ -30,6 +31,7 @@ def make_session_permanent():
 @app.route('/')
 def index():
     is_active = session.get('active', 'no')
+    print(f'is_active: {is_active}')
     if is_active == request.remote_addr or is_active == 'no':
         return render_template('index.html')
     else:
