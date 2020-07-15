@@ -68,9 +68,9 @@ def is_active():
     is_active = cache.get('active')
     print(f'is_active: {is_active}')
     if is_active == is_active == None:
-        return Response({"no"})
+        return Response({"is_active": 'no'})
     else:
-        return Response({"yes"})
+        return Response({"is_active": 'yes'})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, threaded=True)
