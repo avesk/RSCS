@@ -29,7 +29,9 @@ class Commands():
         try:
             ser = serial
             self.ser = ser.Serial(serial_dev)
+            print("SERIAL CONNECTED!")
         except:
+            print("FAKE SERIAL!!")
             ser = fake_serial
             self.ser = ser.Serial(serial_dev)
 

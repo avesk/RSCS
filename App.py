@@ -4,6 +4,7 @@ import cv2 as cv
 import importlib
 import sys
 import time
+import json
 
 from VideoCapture import VideoCapture
 from Commands import Commands
@@ -43,7 +44,7 @@ def video_feed():
 
 @app.route('/post/command', methods=['GET', 'POST'])
 def command():
-    json_data = request.get_json()
+    json_data = json.loads(request.data)
     cmd_code = json_data['cmd']
     if cmd_code in command_map:
         cmd = command_map[f'{cmd_code}']
@@ -52,4 +53,4 @@ def command():
     return Response(json_data)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=True, threaded=True)

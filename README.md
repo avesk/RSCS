@@ -15,6 +15,9 @@ If OpenCV fails to install with `pip install -r requirements.txt`, try:
 https://pimylifeup.com/backup-raspberry-pi/
 
 ## VPN Setup
+### Shutting down the VM
+* SSH into the VM instance
+* run `sudo poweroff`
 
 ### Administrator Access
 Starting the VPN:
@@ -53,7 +56,8 @@ Try running: `sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep
 ***This will likely be taken care of in the .bashrc file***
 
 #### More info:
-[Connecting To Access Server With Linux](https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-linux/)
+* `nohup sudo openvpn --config bot-client.ovpn &`
+* [Connecting To Access Server With Linux](https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-linux/)
   
 ### Registering Remote Operators
 * Contact support and request Administrative access, you will have to give them your public IP address. Support will whitelist your IP and send you the `VPN URL`, `user name` and temporary `password`. 
@@ -64,7 +68,15 @@ Try running: `sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep
 * Also visit the link and download the `OpenVPN Connect` for your OS.
 * Follow the instructions for connecting to your VPN through `OpenVPN Connect`. You will need your `VPN URL`, `user name`, and `password`.
 * You now should be connected to the VPN!
-  
+
+## NGINX
+* Start manually: `uwsgi --ini /home/pi/RSCS/uwsgi_config.ini`
+* viewing error logs `tail -f /var/log/nginx/access.log`
+
+more info: 
+* https://www.raspberrypi-spy.co.uk/2018/12/running-flask-under-nginx-raspberry-pi/
+* https://iotbytes.wordpress.com/python-flask-web-application-on-raspberry-pi-with-nginx-and-uwsgi/
+
 ## Known Issues:
 Problems with `systemd`:
 This stack post helped to solve https://raspberrypi.stackexchange.com/questions/103458/cant-use-sudo-systemctl-start-myservice/113933#113933
