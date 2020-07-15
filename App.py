@@ -1,4 +1,5 @@
 from flask import Flask, render_template, Response, request
+from werkzeug.contrib.cache import SimpleCache
 
 import cv2 as cv
 import importlib
@@ -10,6 +11,7 @@ from VideoCapture import VideoCapture
 from Commands import Commands
 from command_map import command_map 
  
+cache = SimpleCache()
 app = Flask(__name__)
 Camera = VideoCapture()
 commands = Commands()
@@ -18,7 +20,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    is_active = cache.get('active')
+    print(f'is_active: {is_active}')
+    if is_active == request.remote_addr or is_active == None:
+        return render_template('index.html')
+    else:
+        return render_template('bot_in_use.html') 
 
 def gen(camera):
     fps = 0
@@ -44,6 +51,7 @@ def video_feed():
 
 @app.route('/post/command', methods=['GET', 'POST'])
 def command():
+    cache.set('active', request.remote_addr, timeout=30)
     json_data = json.loads(request.data)
     cmd_code = json_data['cmd']
     if cmd_code in command_map:
@@ -51,6 +59,15 @@ def command():
         getattr(commands, cmd)()
 
     return Response(json_data)
+
+@app.route('/is_active')
+def is_active():
+    is_active = cache.get('active')
+    print(f'is_active: {is_active}')
+    if is_active == is_active == None:
+        return Response({"no"})
+    else:
+        return Response({"yes"})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, threaded=True)
