@@ -2,7 +2,6 @@ from flask import Flask, render_template, Response, request
 from werkzeug.contrib.cache import SimpleCache
 
 import cv2 as cv
-from datetime import timedelta
 import importlib
 import sys
 import time
