@@ -1,6 +1,8 @@
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request, session
+from flask_session import Session
 
 import cv2 as cv
+from datetime import timedelta
 import importlib
 import sys
 import time
@@ -16,9 +18,22 @@ commands = Commands()
 
 app = Flask(__name__)
 
+SESSION_TYPE = 'redis'
+app.config.from_object(__name__)
+Session(app)
+
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
+    app.permanent_session_lifetime = timedelta(seconds=10)
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    is_active = session.get('active', 'no')
+    if is_active == request.remote_addr or is_active == 'no':
+        return render_template('index.html')
+    else:
+        return render_template('bot_in_use.html') 
 
 def gen(camera):
     fps = 0
@@ -44,6 +59,7 @@ def video_feed():
 
 @app.route('/post/command', methods=['GET', 'POST'])
 def command():
+    session['active'] = request.remote_addr
     json_data = json.loads(request.data)
     cmd_code = json_data['cmd']
     if cmd_code in command_map:

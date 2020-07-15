@@ -81,6 +81,10 @@ more info:
 * https://www.raspberrypi-spy.co.uk/2018/12/running-flask-under-nginx-raspberry-pi/
 * https://iotbytes.wordpress.com/python-flask-web-application-on-raspberry-pi-with-nginx-and-uwsgi/
 
+## REDIS
+* Install instructions: https://redis.io/topics/quickstart
+* start redis with `redis-server`
+
 ## Known Issues:
 Problems with `systemd`:
 This stack post helped to solve https://raspberrypi.stackexchange.com/questions/103458/cant-use-sudo-systemctl-start-myservice/113933#113933

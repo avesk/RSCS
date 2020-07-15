@@ -2,3 +2,5 @@ __pycache__
 venvs
 rscs_venv
 .pytest_cache
+redis-stable
+redis-stable.tar.gz
