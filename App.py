@@ -65,9 +65,9 @@ def is_active():
     is_active = cache.get('active')
     print(f'is_active: {is_active}')
     if is_active == is_active == None:
-        return Response(jsonify({"is_active": True}))
+        return jsonify({"is_active": True})
     else:
-        return Response(jsonify({"is_active": False}))
+        return jsonify({"is_active": False})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, threaded=True)
