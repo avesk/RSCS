@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request, jsonify
 from werkzeug.contrib.cache import SimpleCache
 
 import cv2 as cv
@@ -65,9 +65,9 @@ def is_active():
     is_active = cache.get('active')
     print(f'is_active: {is_active}')
     if is_active == is_active == None:
-        return Response({"no"})
+        return Response(jsonify({"is_active": True}))
     else:
-        return Response({"yes"})
+        return Response(jsonify({"is_active": False}))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, threaded=True)
