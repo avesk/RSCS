@@ -5,6 +5,39 @@
     Replace server url with actual hostname/ip and port of 
     your python server 
     */
+    const BOT_SELECTION_URL = 'http://10.0.100.0/post/notify_is_free'
+    const notifyIsFree = (data) => {
+      if (!data['is_active']) {
+        $.ajax({
+          type: 'POST',
+          contentType: "application/json; charset=utf-8",
+          url: BOT_SELECTION_URL,
+          data : JSON.stringify(data),
+          success : function(result) {
+            console.log(result)
+          },error : function(result){
+            console.log(result);
+          }
+        });
+      }
+    }
+    window.onbeforeunload = function(){
+      notifyIsFree({is_active: false, ip: location.hostname});
+    }
+    const interval = setInterval(() => {
+      $.ajax({
+          type: 'GET',
+          contentType: "application/json; charset=utf-8",
+          url: "/is_active",
+          success : function(result) {
+            console.log(result);
+            notifyIsFree(result);
+          },error : function(result){
+            console.log(result);
+          }
+      });
+    }, 30000);
+
     var COMMAND_URL = "/post/command";
     var get_key = (code) => {
       code.replace(/(<([^>]+)>)/ig,"")
