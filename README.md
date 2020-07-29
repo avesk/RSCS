@@ -14,7 +14,7 @@ For localhost:
 For Externally Visible Server
 `flask run --host=0.0.0.0`
 
-For WUSGI Server:
+For uWSGI Server:
 `uwsgi --ini /home/pi/RSCS/uwsgi_config.ini`
 
 ## Installation
