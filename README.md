@@ -10,6 +10,9 @@ For localhost:
 For Externally Visible Server
 `flask run --host=0.0.0.0`
 
+For WUSGI Server:
+`uwsgi --ini /home/pi/RSCS/uwsgi_config.ini`
+
 ## Installation
 If OpenCV fails to install with `pip install -r requirements.txt`, try:
 `pip install opencv-contrib-python==4.1.0.25 --no-cache-dir`
